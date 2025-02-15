@@ -1,10 +1,24 @@
 const fs = require('fs');
 const http = require('http');
 const port = 7800;
-const localhost = '127.0.0.1'
+const localhost = '127.0.0.1';
+
 
 const server = http.createServer((req,res) =>{
-    fs.readFile('./Data/index.html',(error,data)=>{
+    let path = './Data/';
+   if(req.url ==='/'){
+   path+= 'index.html';
+   }
+   else if(req.url ==='/about'){
+   path+= 'about.html'
+   }
+   else if(req.url === '/contact'){
+   path+= 'contact.html'
+   }
+  else{
+    path+= 'error.html'
+  }
+    fs.readFile(path,(error,data)=>{
         if(error){
       console.log(error)
         res.end();
