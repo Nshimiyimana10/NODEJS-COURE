@@ -1,19 +1,31 @@
 const express = require('express');
 const app = express();
-app.listen(7800)
+const dataBaseURL = 'mongodb+srv://<Nshimiyimana10>:<Nshimiyimana10>@firstmongodb.3jnjn.mongodb.net/?retryWrites=true&w=majority&appName=FirstMongoDB'
+app.set('view engine','ejs');
+app.set('views','Data');
+app.listen(7800);
+const morgan = require('morgan');
+app.use(morgan('dev'));
+app.use(express.static('public'));
 
 app.get('/',(req,res) =>{
-    res.sendFile('./Data/index.html',{root: __dirname});
+    const infos = [
+        {name:'Peter',age:25, email:'peter@gmail.com'},
+        {name:'John',age:20, email:'john@gmail.com'},
+        {name:'Eric',age:40, email:'eric@gmail.com'},
+        {name:'Med',age:18, email:'med@gmail.com'}
+    ]   
+    res.render('index',{title:'Home',infos});
 })
 
 app.get('/about',(req,res) =>{
-    res.sendFile('./Data/about.html',{root: __dirname});
+    res.render('about',{title:'About'});
 })
 
 app.get('/contact',(req,res) =>{
-    res.sendFile('./Data/contact.html',{root: __dirname});
+    res.render('contact',{title:'Contact'})
 })
 
 app.use((req,res) =>{
-    res.sendFile('./Data/error.html',{root: __dirname});
+    res.status(404).render('error',{title:'Error page'});
 })

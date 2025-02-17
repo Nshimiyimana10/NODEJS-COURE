@@ -17,16 +17,6 @@ const server = http.createServer((req, res) => {
   } else {
     path += "error.html";
     res.statusCode = 404;
-    let path = "./Data/";
-    if (req.url === "/") {
-      path += "index.html";
-    } else if (req.url === "/about") {
-      path += "about.html";
-    } else if (req.url === "contact") {
-      path += "contact.html";
-    } else {
-      path += "error.html";
-    }
   }
   fs.readFile(path, (error, data) => {
     if (error) {
