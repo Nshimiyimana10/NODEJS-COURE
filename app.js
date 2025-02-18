@@ -1,6 +1,10 @@
 const express = require('express');
 const app = express();
-const dataBaseURL = 'mongodb+srv://<Nshimiyimana10>:<Nshimiyimana10>@firstmongodb.3jnjn.mongodb.net/?retryWrites=true&w=majority&appName=FirstMongoDB'
+const dataBaseURL = 'mongodb+srv://Nshimiyimana10:Nshimiyimana10@firstmongodb.3jnjn.mongodb.net/?retryWrites=true&w=majority&appName=FirstMongoDB'
+const mongoose = require('mongoose');
+mongoose.connect(dataBaseURL).then((result) =>{
+    console.log('connected')
+}).catch((error) => console.log(error))
 app.set('view engine','ejs');
 app.set('views','Data');
 app.listen(7800);
